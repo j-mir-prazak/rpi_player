@@ -14,8 +14,7 @@ while true; do
 else
         for entry in "$VideoLocation/"*
         do
-		xset dpms force off
-                
+		xset dpms force off                
                 # -r for stretched over the entire location
 		echo "$entry"
                 omxplayer -b -o both "$entry" > /dev/null
@@ -23,4 +22,3 @@ else
         done
 fi
 done
-
