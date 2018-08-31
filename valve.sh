@@ -1,6 +1,5 @@
 #!/bin/bash
 
-Process="node"
 counter=0
 
 function terminate {
