@@ -9,7 +9,7 @@ function terminate {
 	kill -SIGTERM $PROC1 2>/dev/null
 	echo -e "\e[33m\n\n"
 	echo -e "-----------------------------"
-	echo -e "       VALVE TERMINATED.     "
+	echo -e "        OMX TERMINATED.      "
 	echo -e "-----------------------------"
 	echo -e "\n\n"
 	trap SIGTERM
