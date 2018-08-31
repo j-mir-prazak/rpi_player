@@ -30,7 +30,7 @@ function looping {
 	  echo "-----------------------------"
 	  echo ""
 	  echo ""
-	  bash  omx.sh &
+	  ./omx.sh &
 		PROC2=$!
 		trap 'kill -SIGINT $PROC2; trap SIGINT; break' SIGINT
 		trap 'kill -SIGINT $PROC2; trap SIGTERM; break' SIGTERM
