@@ -144,6 +144,6 @@ echo -e "\e[31mLIFT OFF."
 echo -e "\e[39m"
 
 
-./valve.sh & PROC1=$!
+./cog.sh & PROC1=$!
 
 wait
