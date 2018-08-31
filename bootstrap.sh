@@ -1,5 +1,5 @@
 #!/bin/bash
-CURDIR=$0
+CURDIR=$(dirname $0)
 cd "$0"
 
 echo -ne "\e[35m"

@@ -1,5 +1,5 @@
 #!/bin/bash
-CURDIR=$0
+CURDIR=$(dirname $0)
 cd "$0"
 # set here the path to the directory containing your videos
 VideoLocation="./assets"
@@ -18,7 +18,7 @@ else
 		xset dpms force off
                 # -r for stretched over the entire location
 		echo "$entry"
-                omxplayer -b -o both "$entry" > /dev/null
+    omxplayer -b -o both "$entry" > /dev/null
 		xset dpms force off
         done
 fi
