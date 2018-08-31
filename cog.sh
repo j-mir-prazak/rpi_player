@@ -1,6 +1,5 @@
 #!/bin/bash
 
-Process="node"
 counter=0
 
 function terminate {
@@ -30,7 +29,7 @@ function looping {
 	  echo "-----------------------------"
 	  echo ""
 	  echo ""
-	  node index.js &
+	  ./omx.sh &
 		PROC2=$!
 		trap 'kill -SIGINT $PROC2; trap SIGINT; break' SIGINT
 		trap 'kill -SIGINT $PROC2; trap SIGTERM; break' SIGTERM
