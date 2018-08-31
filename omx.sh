@@ -1,6 +1,6 @@
 #!/bin/bash
 CURDIR=$(dirname $0)
-cd "$0"
+cd "$CURDIR"
 # set here the path to the directory containing your videos
 VideoLocation="./assets"
 
