@@ -1,7 +1,8 @@
 #!/bin/bash
-cd /home/pi/metropol
+CURDIR=$0
+cd "$0"
 # set here the path to the directory containing your videos
-VideoLocation="./video"
+VideoLocation="./assets"
 
 # you can probably leave this alone
 Process="omxplayer"
@@ -14,7 +15,7 @@ while true; do
 else
         for entry in "$VideoLocation/"*
         do
-		xset dpms force off                
+		xset dpms force off
                 # -r for stretched over the entire location
 		echo "$entry"
                 omxplayer -b -o both "$entry" > /dev/null

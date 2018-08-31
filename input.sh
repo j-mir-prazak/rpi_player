@@ -5,7 +5,6 @@ if [ -p input.pipe ]
 then
 	rm input.pipe
 fi
-echo "tesněza"
 mkfifo input.pipe
 
 function terminate {

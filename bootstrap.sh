@@ -1,10 +1,12 @@
 #!/bin/bash
+CURDIR=$0
+cd "$0"
+
 echo -ne "\e[35m"
 echo -e "-----------------------------"
 echo -e "          BOOTSTRAP.         "
 echo -e "-----------------------------"
 
-cd /home/pi/valve
 chmod 0777 -R *
 
 import_folder="rpi_update"
