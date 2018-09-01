@@ -2,7 +2,7 @@
 CURDIR=$(dirname $0)
 cd "$CURDIR"
 # set here the path to the directory containing your videos
-VideoLocation="./assets/video"
+VideoLocation="./assets"
 
 # you can probably leave this alone
 Process="omxplayer"
