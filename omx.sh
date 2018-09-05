@@ -7,6 +7,7 @@ VideoLocation="./assets"
 if [ -d /media/pi/*/rpi_player ]
 then
   VideoLocation=/media/pi/*/rpi_player/assets
+fi
 # you can probably leave this alone
 Process="omxplayer"
 # our loop
