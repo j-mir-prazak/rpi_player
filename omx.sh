@@ -63,4 +63,8 @@ else
 		    xset dpms force off
         done
 fi
-done
+done &
+PROC2=$!
+trap 'kill -SIGINT $PROC2; trap SIGINT; break' SIGINT
+trap 'kill -SIGINT $PROC2; trap SIGTERM; break' SIGTERM
+wait
