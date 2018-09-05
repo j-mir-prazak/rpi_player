@@ -16,6 +16,7 @@ Process="omxplayer"
 while true; do
         if ps ax | grep -v grep | grep $Process > /dev/null
         then
+        echo "omx is running. sleeping."
         sleep 1;
 else
         for entry in $VideoLocation/*
