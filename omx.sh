@@ -58,10 +58,10 @@ else
                 # -r for stretched over the entire location
 		    echo "$entry"
         omxplayer -b -o both "$entry" > /dev/null &
-        trap 'kill -SIGINT $PROC2; trap SIGINT; break' SIGINT
-        trap 'kill -SIGINT $PROC2; trap SIGTERM; break' SIGTERM
-        wait
         PROC1=$!
+        trap 'kill -SIGINT $PROC1; trap SIGINT; break' SIGINT
+        trap 'kill -SIGINT $PROC1; trap SIGTERM; break' SIGTERM
+        wait
 		    xset dpms force off
         done
 fi
