@@ -40,8 +40,6 @@ do
 done
 echo "Video source: "$VideoLocation
 
-sleep 4
-
 # you can probably leave this alone
 Process="omxplayer"
 # our loop
