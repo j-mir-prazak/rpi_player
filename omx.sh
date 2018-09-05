@@ -9,7 +9,9 @@ function terminate {
 
   xset dpms force off
 	kill -SIGINT $PROC1 2>/dev/null
+	kill -SIGINT $PROC2 2>/dev/null
 	kill -SIGTERM $PROC1 2>/dev/null
+	kill -SIGTERM $PROC2 2>/dev/null
 	echo -e "\e[33m\n\n"
 	echo -e "-----------------------------"
 	echo -e "      LOOPING TERMINATED.    "
