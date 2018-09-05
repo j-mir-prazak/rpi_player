@@ -7,12 +7,18 @@ VideoLocation="./assets"
 
 function terminate {
 
-  xset dpms force off
+
+  xset dpms force on
+  kill -SIGTERM $PROC1 2>/dev/null
 	kill -SIGINT $PROC1 2>/dev/null
-	kill -SIGINT $PROC2 2>/dev/null
-	kill -SIGTERM $PROC1 2>/dev/null
-	kill -SIGTERM $PROC2 2>/dev/null
-	echo -e "\e[33m\n\n"
+
+  kill -SIGTERM $PROC2 2>/dev/null
+  kill -SIGINT $PROC2 2>/dev/null
+
+  kill -SIGTERM $PROC3 2>/dev/null
+	kill -SIGINT $PROC3 2>/dev/null
+
+  echo -e "\e[33m\n\n"
 	echo -e "-----------------------------"
 	echo -e "      LOOPING TERMINATED.    "
 	echo -e "-----------------------------"
@@ -46,27 +52,33 @@ echo "Video source: "$VideoLocation
 Process="omxplayer"
 # our loop
 xset dpms force off
-while true; do
-        if ps ax | grep -v grep | grep $Process > /dev/null
-        then
-        echo "omx is running. Sleeping."
-        sleep 1;
-else
-        for entry in $VideoLocation/*
-        do
-		    xset dpms force off
-                # -r for stretched over the entire location
-		    echo "$entry"
-        omxplayer -b -o both "$entry" > /dev/null &
-        PROC1=$!
-        trap 'kill -SIGINT $PROC1; trap SIGINT; break' SIGINT
-        trap 'kill -SIGINT $PROC1; trap SIGTERM; break' SIGTERM
-        wait
-		    xset dpms force off
-        done
-fi
-done &
-PROC2=$!
-trap 'kill -SIGINT $PROC2; trap SIGINT; break' SIGINT
-trap 'kill -SIGINT $PROC2; trap SIGTERM; break' SIGTERM
+function looping {
+  while true;
+  do
+          if ps ax | grep -v grep | grep $Process > /dev/null
+          then
+                  echo "omx is running. Sleeping."
+                  sleep 1;
+          else
+                  for entry in $VideoLocation/*
+                  do
+            		    xset dpms force off
+                            # -r for stretched over the entire location
+            		    echo "$entry"
+                    omxplayer -b -o both "$entry" > /dev/null &
+                    PROC1=$!
+                    trap 'kill -SIGINT $PROC1; trap SIGINT; break; terminate' SIGINT
+                    trap 'kill -SIGINT $PROC1; trap SIGTERM; break; terminate' SIGTERM
+                    wait
+            		    xset dpms force off
+                  done &
+                  PROC2=$!
+                  trap 'kill -SIGTERM $PROC2; trap SIGINT; break; terminate' SIGINT
+                  trap 'kill -SIGTERM $PROC2; trap SIGTERM; break; terminate' SIGTERM
+                  wait
+          fi
+  done
+}
+looping &
+PROC3=$!
 wait

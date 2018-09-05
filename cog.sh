@@ -4,8 +4,14 @@ counter=0
 
 function terminate {
 
-	kill -SIGINT $PROC1 2>/dev/null
+
+	kill -SIGTERM $PROC2 2>/dev/null
+	kill -SIGINT $PROC2 2>/dev/null
+
 	kill -SIGTERM $PROC1 2>/dev/null
+	kill -SIGINT $PROC1 2>/dev/null
+
+
 	echo -e "\e[33m\n\n"
 	echo -e "-----------------------------"
 	echo -e "        OMX TERMINATED.      "
@@ -31,8 +37,8 @@ function looping {
 	  echo ""
 	  ./omx.sh &
 		PROC2=$!
-		trap 'kill -SIGINT $PROC2; trap SIGINT; break' SIGINT
-		trap 'kill -SIGINT $PROC2; trap SIGTERM; break' SIGTERM
+		trap 'kill -SIGTERM $PROC2; trap SIGTERM; break' SIGTERM
+		trap 'kill -SIGTERM $PROC2; trap SIGINT; break' SIGINT
 		wait
 		echo ""
 	  counter=$(expr $counter + 1)
