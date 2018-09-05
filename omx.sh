@@ -7,6 +7,7 @@ VideoLocation="./assets"
 if [ -d /media/pi/*/rpi_player ]
 then
   VideoLocation=/media/pi/*/rpi_player/assets
+  echo VideoLocation
 fi
 # you can probably leave this alone
 Process="omxplayer"
@@ -17,7 +18,7 @@ while true; do
         then
         sleep 1;
 else
-        for entry in "$VideoLocation/"*
+        for entry in $VideoLocation/*
         do
 		    #xset dpms force off
                 # -r for stretched over the entire location
