@@ -69,14 +69,14 @@ function looping {
             		    echo "$entry"
                     omxplayer -b -o both "$entry" > /dev/null &
                     PROC1=$!
-                    trap 'kill -SIGINT $PROC1; trap SIGINT; break; terminate' SIGINT
-                    trap 'kill -SIGINT $PROC1; trap SIGTERM; break; terminate' SIGTERM
+                    trap 'kill -SIGINT $PROC1 2>/dev/null; trap SIGINT; break; terminate' SIGINT
+                    trap 'kill -SIGINT $PROC1 2>/dev/null; trap SIGTERM; break; terminate' SIGTERM
                     wait
             		    xset dpms force off
                   done &
                   PROC2=$!
-                  trap 'kill -SIGTERM $PROC2; trap SIGINT; break; terminate' SIGINT
-                  trap 'kill -SIGTERM $PROC2; trap SIGTERM; break; terminate' SIGTERM
+                  trap 'kill -SIGTERM $PROC2 2>/dev/null; trap SIGINT; break; terminate' SIGINT
+                  trap 'kill -SIGTERM $PROC2 2>/dev/null; trap SIGTERM; break; terminate' SIGTERM
                   wait
           fi
   done
