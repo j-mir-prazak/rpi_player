@@ -4,6 +4,9 @@ cd "$CURDIR"
 # set here the path to the directory containing your videos
 VideoLocation="./assets"
 
+if [ -d /media/pi/*/rpi_player ]
+then
+  VideoLocation=/media/pi/*/rpi_player/assets
 # you can probably leave this alone
 Process="omxplayer"
 # our loop
@@ -15,11 +18,11 @@ while true; do
 else
         for entry in "$VideoLocation/"*
         do
-		xset dpms force off
+		    xset dpms force off
                 # -r for stretched over the entire location
-		echo "$entry"
-    omxplayer -b -o both "$entry" > /dev/null
-		xset dpms force off
+		    echo "$entry"
+        omxplayer -b -o both "$entry" > /dev/null
+		    xset dpms force off
         done
 fi
 done
