@@ -7,7 +7,6 @@ VideoLocation="./assets"
 
 function terminate {
 
-  xset dpms force on
 
   kill -SIGTERM $PROC1 2>/dev/null
 	kill -SIGINT $PROC1 2>/dev/null
@@ -25,7 +24,10 @@ function terminate {
 	echo -e "\n\n"
 	trap SIGTERM
 	trap SIGINT
-	kill -SIGTERM $$ 2>/dev/null
+
+  xset dpms force on
+
+  kill -SIGTERM $$ 2>/dev/null
 	}
 
 trap terminate SIGINT
