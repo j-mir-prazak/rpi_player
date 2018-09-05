@@ -7,7 +7,7 @@ VideoLocation="./assets"
 if [ -d /media/pi/*/rpi_player ]
 then
   VideoLocation=/media/pi/*/rpi_player/assets
-  echo VideoLocation
+  echo $VideoLocation
 fi
 # you can probably leave this alone
 Process="omxplayer"
