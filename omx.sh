@@ -5,32 +5,64 @@ cd "$CURDIR"
 VideoLocation="./assets"
 
 
+function terminate {
+
+  xset dpms force off
+	kill -SIGINT $PROC1 2>/dev/null
+	kill -SIGTERM $PROC1 2>/dev/null
+	echo -e "\e[33m\n\n"
+	echo -e "-----------------------------"
+	echo -e "      LOOPING TERMINATED.    "
+	echo -e "-----------------------------"
+	echo -e "\n\n"
+	trap SIGTERM
+	trap SIGINT
+	kill -SIGTERM $$ 2>/dev/null
+	}
+
+trap terminate SIGINT
+# trap 'echo int; kill -SIGINT $PROC1' SIGINT
+trap terminate SIGTERM
+
+
 for i in /media/*/*/rpi_player
 do
   if [ -d $i ]
   then
-    VideoLocation=/media/*/*/rpi_player/assets
+    for i in $i/assets/*
+    do
+      if [ -e $i ]
+      then
+        VideoLocation=/media/*/*/rpi_player/assets
+      fi
+    done
   fi
 done
-echo $VideoLocation
+echo "Video source: "$VideoLocation
+
+sleep 4
 
 # you can probably leave this alone
 Process="omxplayer"
 # our loop
-#xset dpms force off
+xset dpms force off
 while true; do
         if ps ax | grep -v grep | grep $Process > /dev/null
         then
-        echo "omx is running. sleeping."
+        echo "omx is running. Sleeping."
         sleep 1;
 else
         for entry in $VideoLocation/*
         do
-		    #xset dpms force off
+		    xset dpms force off
                 # -r for stretched over the entire location
 		    echo "$entry"
-        omxplayer -b -o both "$entry" > /dev/null
-		    #xset dpms force off
+        omxplayer -b -o both "$entry" > /dev/null &
+        trap 'kill -SIGINT $PROC2; trap SIGINT; break' SIGINT
+        trap 'kill -SIGINT $PROC2; trap SIGTERM; break' SIGTERM
+        wait
+        PROC1=$!
+		    xset dpms force off
         done
 fi
 done
