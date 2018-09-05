@@ -7,8 +7,8 @@ VideoLocation="./assets"
 
 function terminate {
 
-
   xset dpms force on
+
   kill -SIGTERM $PROC1 2>/dev/null
 	kill -SIGINT $PROC1 2>/dev/null
 
