@@ -7,6 +7,7 @@ VideoLocation="./assets"
 
 function terminate {
 
+  kill -SIGKILL $PROC1 2>/dev/null
 
   kill -SIGTERM $PROC1 2>/dev/null
   kill -SIGTERM $PROC2 2>/dev/null
@@ -69,14 +70,15 @@ function looping {
             		    echo "$entry"
                     omxplayer -b -o both "$entry" > /dev/null &
                     PROC1=$!
-                    trap 'kill -SIGTERM $PROC1 2>/dev/null; trap SIGTERM; break; terminate' SIGINT
-                    trap 'kill -SIGINT $PROC1 2>/dev/null; trap SIGINT; break; terminate' SIGTERM
+                    trap 'kill -SIGKILL $PROC1 2>/dev/null; trap SIGKILL; break; terminate' SIGKILL
+                    trap 'kill -SIGTERM $PROC1 2>/dev/null; trap SIGTERM; break; terminate' SIGTERM
+                    trap 'kill -SIGINT $PROC1 2>/dev/null; trap SIGINT; break; terminate' SIGINT
                     wait
             		    xset dpms force off
                   done &
                   PROC2=$!
-                  trap 'kill -SIGTERM $PROC2 2>/dev/null; trap SIGINT; break; terminate' SIGINT
-                  trap 'kill -SIGINT $PROC2 2>/dev/null; trap SIGINT; break; terminate' SIGTERM
+                  trap 'kill -SIGTERM $PROC2 2>/dev/null; trap SIGINT; break; terminate' SIGTERM
+                  trap 'kill -SIGINT $PROC2 2>/dev/null; trap SIGINT; break; terminate' SIGINT
                   wait
           fi
   done
