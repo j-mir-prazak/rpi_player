@@ -6,7 +6,7 @@ function terminate {
 
 
 	kill -SIGTERM $PROC2 2>/dev/null
-	kill -SIGINT $PROC2 2>/dev/null
+	kill -SIGTERM $PROC2 2>/dev/null
 
 	kill -SIGTERM $PROC1 2>/dev/null
 	kill -SIGINT $PROC1 2>/dev/null
