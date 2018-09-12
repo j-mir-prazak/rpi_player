@@ -40,9 +40,9 @@ for i in /media/*/*/rpi_player
 do
   if [ -d $i ]
   then
-    for i in $i/assets/*
+    for y in $i/assets/*
     do
-      if [ -e $i ]
+      if [ -e $y ]
       then
         VideoLocation=/media/*/*/rpi_player/assets
       fi
