@@ -68,7 +68,7 @@ function looping {
             		    xset dpms force off
                             # -r for stretched over the entire location
             		    echo "$entry"
-                    omxplayer.bin -b -o both "$entry" > /dev/null &
+                    omxplayer.bin -b -o local "$entry" > /dev/null &
                     PROC1=$!
                     trap 'kill -SIGTRAP $PROC1 2>/dev/null; trap SIGTERM; break; terminate' SIGTERM
                     trap 'kill -SIGTERM $PROC1 2>/dev/null; trap SIGTERM; break; terminate' SIGTERM
