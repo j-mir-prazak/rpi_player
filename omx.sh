@@ -1,4 +1,4 @@
-#!/bin/bash
+ #!/bin/bash
 CURDIR=$(dirname $0)
 cd "$CURDIR"
 # set here the path to the directory containing your videos
@@ -38,11 +38,11 @@ trap terminate SIGTERM
 
 for i in /media/*/*/rpi_player
 do
-  if [ -d $i ]
+  if [ -d "$i" ]
   then
-    for y in $i/assets/*
+    for y in "$i/assets/"*
     do
-      if [ -e $y ]
+      if [ -e "$y" ]
       then
         VideoLocation=/media/*/*/rpi_player/assets
       fi
