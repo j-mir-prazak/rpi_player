@@ -5,6 +5,7 @@ if [ -p input.pipe ]
 then
 	rm input.pipe
 fi
+
 mkfifo input.pipe
 
 function terminate {
@@ -18,6 +19,7 @@ function terminate {
 	trap SIGINT;
 	trap SIGTERM;
 	kill -SIGINT $MAINPID 2>/dev/null
+	kill -SIGINT $PROC1 2>/dev/null
 	kill -SIGINT $$
 	# kill -2 $MAINPID
 	}
@@ -25,11 +27,17 @@ function terminate {
 trap terminate SIGINT
 trap terminate SIGTERM
 
-while true;
-do read STRING <input.pipe;
- 	if [ "$STRING" == "die-now" ]
- 	then
-		terminate
-		# kill -SIGINT $$ 2>/dev/null
-	fi
-done
+function looping {
+	while true;
+	do read STRING <input.pipe;
+	 	if [ "$STRING" == "die-now" ]
+	 	then
+			terminate
+			# kill -SIGINT $$ 2>/dev/null
+		fi
+	done
+}
+
+looping &
+PROC1=$!
+wait
