@@ -97,7 +97,7 @@ trap terminate SIGTERM
 
 
 echo -e "CHECKING FOR FILES TO UPDATE."
-sleep 10
+sleep 5
 
 for i in /media/* ; do
 
