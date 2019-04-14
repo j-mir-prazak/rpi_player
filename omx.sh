@@ -26,7 +26,7 @@ function terminate {
 	trap SIGTERM
 	trap SIGINT
 
-  xset dpms force on
+  #xset dpms force on
 
   kill -SIGTERM $$ 2>/dev/null
 	}
@@ -54,18 +54,18 @@ echo "Video source: "$VideoLocation
 # you can probably leave this alone
 Process="omxplayer"
 # our loop
-xset dpms force off
+#xset dpms force off
 function looping {
   while true;
   do
           if ps ax | grep -v grep | grep $Process > /dev/null
           then
-                  echo "omx is running. Sleeping."
+                  #echo "omx is running. Sleeping."
                   sleep 1;
           else
                   for entry in $VideoLocation/*
                   do
-            		    xset dpms force off
+            		    #xset dpms force off
                             # -r for stretched over the entire location
             		    echo "$entry"
                     omxplayer.bin -b -o local "$entry" > /dev/null &
@@ -74,7 +74,7 @@ function looping {
                     trap 'kill -SIGTERM $PROC1 2>/dev/null; trap SIGTERM; break; terminate' SIGTERM
                     trap 'kill -SIGINT $PROC1 2>/dev/null; trap SIGINT; break; terminate' SIGINT
                     wait
-            		    xset dpms force off
+            		    #xset dpms force off
                   done &
                   PROC2=$!
                   trap 'kill -SIGTERM $PROC2 2>/dev/null; trap SIGINT; break; terminate' SIGTERM
