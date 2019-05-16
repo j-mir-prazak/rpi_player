@@ -1,4 +1,9 @@
 #!/bin/bash
+
+#a=$(md5sum -b assets/output.mkv); b=$(md5sum -b /media/pi/flora/rpi_update/assets/output.mkv); a=${a% *}; b=${b% *}; echo $a $b
+
+
+
 CURDIR=$(dirname $0)
 cd "$CURDIR"
 
