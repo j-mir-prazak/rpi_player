@@ -37,8 +37,8 @@ function looping {
 	  echo ""
 	  ./omx.sh &
 		PROC2=$!
-		trap 'break' SIGINT
-		trap 'break' SIGTERM
+		trap 'break; terminate' SIGINT
+		trap 'break; terminate' SIGTERM
 		wait
 		echo ""
 	  counter=$(expr $counter + 1)
