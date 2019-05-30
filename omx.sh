@@ -65,7 +65,7 @@ function looping {
           else
                   for entry in $VideoLocation/*
                   do
-            		    xset dpms force off
+            		    #xset dpms force off
                             # -r for stretched over the entire location
             		    echo "$entry"
                     omxplayer.bin -b -o local "$entry" > /dev/null &
