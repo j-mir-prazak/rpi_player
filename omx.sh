@@ -54,7 +54,7 @@ echo "Video source: "$VideoLocation
 # you can probably leave this alone
 Process="omxplayer"
 # our loop
-#xset dpms force off
+xset dpms force off
 function looping {
   while true;
   do
