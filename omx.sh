@@ -85,6 +85,6 @@ function looping {
 }
 looping &
 PROC3=$!
-trap 'echo wait1; kill -SIGTERM $PROC3 2>/dev/null; trap SIGINT; break; terminate' SIGTERM
-trap 'echo wait2; kill -SIGINT $PROC3 2>/dev/null; trap SIGINT; break; terminate' SIGINT
+trap 'echo waitomx; kill -SIGTERM $PROC3 2>/dev/null; trap SIGINT; break; terminate' SIGTERM
+trap 'echo waitomx; kill -SIGINT $PROC3 2>/dev/null; trap SIGINT; break; terminate' SIGINT
 wait
