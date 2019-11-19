@@ -70,15 +70,15 @@ function looping {
             		    echo "$entry"
                     omxplayer.bin -b -o local "$entry" > /dev/null &
                     PROC1=$!
-                    trap 'kill -SIGTRAP $PROC1 2>/dev/null; trap SIGTERM; break; terminate' SIGTERM
-                    trap 'kill -SIGTERM $PROC1 2>/dev/null; trap SIGTERM; break; terminate' SIGTERM
-                    trap 'kill -SIGINT $PROC1 2>/dev/null; trap SIGINT; break; terminate' SIGINT
+                    trap 'echo while1; kill -SIGTRAP $PROC1 2>/dev/null; trap SIGTERM; break; terminate' SIGTERM
+                    trap 'echo while1; kill -SIGTERM $PROC1 2>/dev/null; trap SIGTERM; break; terminate' SIGTERM
+                    trap 'echo while1; kill -SIGINT $PROC1 2>/dev/null; trap SIGINT; break; terminate' SIGINT
                     wait
             		    #xset dpms force off
                   done &
                   PROC2=$!
-                  trap 'kill -SIGTERM $PROC2 2>/dev/null; trap SIGINT; break; terminate' SIGTERM
-                  trap 'kill -SIGINT $PROC2 2>/dev/null; trap SIGINT; break; terminate' SIGINT
+                  trap 'echo while2; kill -SIGTERM $PROC2 2>/dev/null; trap SIGINT; break; terminate' SIGTERM
+                  trap 'echo while2; kill -SIGINT $PROC2 2>/dev/null; trap SIGINT; break; terminate' SIGINT
                   wait
           fi
   done
