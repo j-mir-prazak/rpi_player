@@ -107,7 +107,7 @@ sleep 5
 for i in /media/* ; do
 
   if [ -d "$i/$import_folder/" ]; then
-
+	echo "LISTING"
 	echo "$i/$import_folder"
 
 	list_through_files "$i/$import_folder"
@@ -119,6 +119,7 @@ for i in /media/* ; do
   for j in "$i/"* ; do
 
      if [ -d "$j/$import_folder/" ]; then
+			 echo "LISTING"
 
         echo "$j/$import_folder"
 
