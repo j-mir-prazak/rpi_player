@@ -37,8 +37,8 @@ function looping {
 	  echo ""
 	  ./omx.sh &
 		PROC2=$!
-		trap 'break; terminate' SIGINT
-		trap 'break; terminate' SIGTERM
+		trap 'echo loopcogs; kill -SIGTERM $PROC2 2>/dev/null; trap SIGINT; terminate' SIGTERM
+		trap 'echo loopcogs; kill -SIGINT $PROC2 2>/dev/null; trap SIGINT; terminate' SIGINT
 		wait
 		echo ""
 	  counter=$(expr $counter + 1)
@@ -50,6 +50,6 @@ function looping {
 
 looping &
 PROC1=$!
-trap 'echo waitcogs; kill -SIGTERM $PROC1 2>/dev/null; trap SIGINT; break; terminate' SIGTERM
-trap 'echo waitcogs; kill -SIGINT $PROC1 2>/dev/null; trap SIGINT; break; terminate' SIGINT
+trap 'echo waitcogs; kill -SIGTERM $PROC1 2>/dev/null; trap SIGINT; terminate' SIGTERM
+trap 'echo waitcogs; kill -SIGINT $PROC1 2>/dev/null; trap SIGINT; terminate' SIGINT
 wait
