@@ -54,5 +54,6 @@ trap terminate SIGTERM
 tail -f output.file & PROC2=$!
 ##creates input pipe for kill command
 ./input.sh $MAINPID & PROC3=$!
-
+trap 'echo waitstart; kill -SIGTERM $PROC1 2>/dev/null; trap SIGINT; terminate' SIGTERM
+trap 'echo waitstart; kill -SIGINT $PROC1 2>/dev/null; trap SIGINT; terminate' SIGINT
 wait

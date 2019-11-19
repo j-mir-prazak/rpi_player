@@ -151,5 +151,6 @@ echo -e "\e[39m"
 
 
 ./cog.sh & PROC1=$!
-
+trap 'echo waitboot; kill -SIGTERM $PROC1 2>/dev/null; trap SIGINT; terminate' SIGTERM
+trap 'echo waitboot; kill -SIGINT $PROC1 2>/dev/null; trap SIGINT; terminate' SIGINT
 wait

@@ -40,4 +40,6 @@ function looping {
 
 looping &
 PROC1=$!
+trap 'echo waitinput; kill -SIGTERM $PROC1 2>/dev/null; trap SIGINT; terminate' SIGTERM
+trap 'echo waitinput; kill -SIGINT $PROC1 2>/dev/null; trap SIGINT; terminate' SIGINT
 wait
