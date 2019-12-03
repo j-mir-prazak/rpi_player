@@ -29,11 +29,11 @@ function list_through_files {
 				update_assets "$a"
 			else
 				echo "COPING $a"
-				gcp --force --recursive "$a" "./"
+				rsync --info=progress2 -r "$a" "./"
 			fi
 		else
 			echo "COPING $a"
-			gcp --force --recursive "$a" "./"
+			rsync --info=progress2 -r "$a" "./"
 		fi
 	done
 
@@ -50,12 +50,12 @@ function update_assets {
 		if [ ! -d "$v" ] ; then
 			if [ ! -f "./assets/$(basename "$v")" ] ; then
 				echo -e "COPING $v"
-				gcp "$v" "./assets/$(basename "$v")"
+				rsync --info=progress2 "$v" "./assets/$(basename "$v")"
 
 			fi
 		else
 			echo "COPING $v"
-			gcp "$v" "./assets/$(basename "$v")"
+			rsync --info=progress2 "$v" "./assets/$(basename "$v")"
 		fi
 
 	done
