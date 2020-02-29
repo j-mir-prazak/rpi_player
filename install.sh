@@ -28,7 +28,9 @@ if [[ -d "/etc/xdg/lxsession/LXDE"  ]]; then
 	sudo rm "/etc/xdg/lxsession/LXDE" -rf
 fi
 
-
+if [[ -f "/etc/xdg/autostart/piwiz.desktop" ]]; then
+	sudo rm /etc/xdg/autostart/piwiz.desktop
+fi
 
 }
 

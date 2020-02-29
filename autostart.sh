@@ -4,7 +4,8 @@ cd "$CURDIR"
 
 xset s off
 xset -dpms
-
+unclutter -s 1
+sudo unclutter -s 1
 
 MAINPID=$$
 
