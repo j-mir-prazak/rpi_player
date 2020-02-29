@@ -2,6 +2,10 @@
 CURDIR=$(dirname $0)
 cd "$CURDIR"
 
+xset s off
+xset -dpms
+
+
 MAINPID=$$
 
 if [ -f output.file ]

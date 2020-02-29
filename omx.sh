@@ -54,7 +54,6 @@ echo "Video source: "$VideoLocation
 # you can probably leave this alone
 Process="omxplayer"
 # our loop
-xset dpms force off
 function looping {
   while true;
   do
@@ -65,7 +64,7 @@ function looping {
           else
                   for entry in $VideoLocation/*
                   do
-            		    #xset dpms force off
+            		    #et dpms force off
                             # -r for stretched over the entire location
             		    echo "$entry"
                     omxplayer.bin -b -o local "$entry" > /dev/null &

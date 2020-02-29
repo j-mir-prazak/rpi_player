@@ -29,8 +29,6 @@ if [[ -d "/etc/xdg/lxsession/LXDE"  ]]; then
 fi
 
 
-xset s off
-xset -dpms
 
 }
 
