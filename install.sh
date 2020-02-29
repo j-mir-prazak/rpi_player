@@ -13,7 +13,8 @@ if [[ -d ~/".config/lxsession/LXDE-pi/" ]]; then
 		rm ~/".config/lxsession/LXDE-pi/autostart";
 	fi
 fi
-sudo -i
+
+function sudoing {
 if [[ ! -d "/etc/xdg/lxsession/LXDE-pi"  ]]; then
 	sudo mkdir -p "/etc/xdg/lxsession/LXDE-pi"
 fi
@@ -26,7 +27,9 @@ fi
 if [[ -d "/etc/xdg/lxsession/LXDE"  ]]; then
 	sudo rm "/etc/xdg/lxsession/LXDE" -rf
 fi
-exit
+}
+
+sudo sudoing
 
 echo -n "" >~/".config/autostart/rpi_player.desktop"
 echo -e "[Desktop Entry]\nType=Application\nExec=""$path""/autostart.sh" >>~/".config/autostart/rpi_player.desktop"
