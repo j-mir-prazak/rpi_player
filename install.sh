@@ -29,11 +29,13 @@ if [[ -d "/etc/xdg/lxsession/LXDE"  ]]; then
 fi
 }
 
-sudo sudoing
+sudo_fun=$(declare -f sudoing)
+sudo bash -c "$sudo_fun; sudoing"
+
 
 echo -n "" >~/".config/autostart/rpi_player.desktop"
 echo -e "[Desktop Entry]\nType=Application\nExec=""$path""/autostart.sh" >>~/".config/autostart/rpi_player.desktop"
 
 chmod +x ~/".config/autostart" -R
-chmod +x ~/".config/autostart/*" -R
+chmod +x ~/".config/autostart/"* -R
 chmod +x -R $path/*
