@@ -27,6 +27,11 @@ fi
 if [[ -d "/etc/xdg/lxsession/LXDE"  ]]; then
 	sudo rm "/etc/xdg/lxsession/LXDE" -rf
 fi
+
+
+xset s off
+xset -dpms
+
 }
 
 sudo_fun=$(declare -f sudoing)
