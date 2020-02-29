@@ -14,8 +14,15 @@ fi
 
 if [[ ! -d "/etc/xdg/lxsession/LXDE-pi"  ]]; then
 	sudo mkdir -p "/etc/xdg/lxsession/LXDE-pi"
+fi
+
+if [[ -d "/etc/xdg/lxsession/LXDE-pi" ]]; then
 	sudo echo -ne "" >"/etc/xdg/lxsession/LXDE-pi/autostart"
 	sudo echo -e "@pcmanfm -d" >>"/etc/xdg/lxsession/LXDE-pi/autostart"
+fi
+
+if [[ -d "/etc/xdg/lxsession/LXDE"  ]]; then
+	sudo rm "/etc/xdg/lxsession/LXDE" -rf
 fi
 
 echo -n "" >~/".config/autostart/rpi_player.desktop"
