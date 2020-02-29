@@ -12,7 +12,7 @@ if [[ -d ~/".config/lxsession/LXDE-pi/" ]]; then
 	fi
 fi
 
-sudo (
+sudo bash -c (
 if [[ ! -d "/etc/xdg/lxsession/LXDE-pi"  ]]; then
 	sudo mkdir -p "/etc/xdg/lxsession/LXDE-pi"
 fi
