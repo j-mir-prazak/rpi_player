@@ -4,6 +4,7 @@ CURDIR=$(dirname $0)
 cd "$CURDIR"
 # set here the path to the directory containing your videos
 VideoLocation="./assets"
+TimetableLocation="/boot/timetable.json"
 
 
 function terminate {
@@ -60,6 +61,12 @@ function looping {
   do
       SetSubfolder=""
 
+			SetFolder=$(./tinker.sh "$TimetableLocation")
+			if [[ "$?" == 0 ]]; then
+
+				SetSubfolder="$SetFolder"
+
+			fi
 
       VideoLocation="$VideoLocation/$SetSubfolder"
 
