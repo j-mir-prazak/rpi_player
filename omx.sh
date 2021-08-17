@@ -65,7 +65,7 @@ function looping {
 			if [[ "$?" == 0 ]]; then
 
 
-				echo "timetable run"
+				echo "TIMETABLE RUN."
 				SetSubfolder="$SetFolder"
 				VideoLocation="$VideoLocation/$SetSubfolder"
 
