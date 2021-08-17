@@ -65,10 +65,10 @@ function looping {
 			if [[ "$?" == 0 ]]; then
 
 				SetSubfolder="$SetFolder"
+				VideoLocation="$VideoLocation/$SetSubfolder"
 
 			fi
 
-      VideoLocation="$VideoLocation/$SetSubfolder"
 
           if ps ax | grep -v grep | grep $Process > /dev/null
           then
