@@ -56,9 +56,14 @@ echo "Video source: "$VideoLocation
 # you can probably leave this alone
 Process="omxplayer"
 # our loop
+
+OriginalVideoLocation="$VideoLocation"
+
 function looping {
   while true;
   do
+		
+			VideoLocation="$OriginalVideoLocation"
       SetSubfolder=""
 
 			SetFolder=$(./tinker.sh "$TimetableLocation")
