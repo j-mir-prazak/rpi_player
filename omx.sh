@@ -64,6 +64,8 @@ function looping {
 			SetFolder=$(./tinker.sh "$TimetableLocation")
 			if [[ "$?" == 0 ]]; then
 
+
+				echo "timetable run"
 				SetSubfolder="$SetFolder"
 				VideoLocation="$VideoLocation/$SetSubfolder"
 
