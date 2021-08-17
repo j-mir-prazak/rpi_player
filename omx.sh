@@ -58,6 +58,11 @@ Process="omxplayer"
 function looping {
   while true;
   do
+      SetSubfolder=""
+
+
+      VideoLocation="$VideoLocation/$SetSubfolder"
+
           if ps ax | grep -v grep | grep $Process > /dev/null
           then
                   #echo "omx is running. Sleeping."
@@ -80,6 +85,8 @@ function looping {
                   trap 'echo while2; kill -SIGTERM $PROC2 2>/dev/null; trap SIGINT; break; terminate' SIGTERM
                   trap 'echo while2; kill -SIGINT $PROC2 2>/dev/null; trap SIGINT; break; terminate' SIGINT
                   wait
+
+
           fi
   done
 }
