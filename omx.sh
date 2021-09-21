@@ -62,7 +62,7 @@ OriginalVideoLocation="$VideoLocation"
 function looping {
   while true;
   do
-		
+
 			VideoLocation="$OriginalVideoLocation"
       SetSubfolder=""
 
@@ -87,7 +87,7 @@ function looping {
             		    #et dpms force off
                             # -r for stretched over the entire location
             		    echo "$entry"
-                    omxplayer.bin -b -o local "$entry" > /dev/null &
+                    omxplayer.bin -o local "$entry" > /dev/null &
                     PROC1=$!
                     trap 'echo while1; kill -SIGTRAP $PROC1 2>/dev/null; trap SIGTERM; break; terminate' SIGTERM
                     trap 'echo while1; kill -SIGTERM $PROC1 2>/dev/null; trap SIGTERM; break; terminate' SIGTERM
