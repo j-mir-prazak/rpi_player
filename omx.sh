@@ -5,7 +5,7 @@ cd "$CURDIR"
 # set here the path to the directory containing your videos
 VideoLocation="./assets"
 TimetableLocation="/boot/timetable.json"
-AOUTLocation="/boot/aou"
+AOUTLocation="/boot/aout"
 
 function terminate {
 
