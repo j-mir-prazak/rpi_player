@@ -77,8 +77,8 @@ function looping {
 	  fi
 
       AOUT=local
-      if [[ -f AOUTLocation ]]; then
-        AOUT=$(cat AOUTLocation)
+      if [[ -f $AOUTLocation ]]; then
+        AOUT=$(cat $AOUTLocation)
       fi
 
 
