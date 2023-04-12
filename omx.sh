@@ -5,7 +5,7 @@ cd "$CURDIR"
 # set here the path to the directory containing your videos
 VideoLocation="./assets"
 TimetableLocation="/boot/timetable.json"
-
+AOUTLocation="/boot/aout"
 
 function terminate {
 
@@ -60,48 +60,47 @@ Process="omxplayer"
 OriginalVideoLocation="$VideoLocation"
 
 function looping {
-  while true;
-  do
+  while true; do
 
-			VideoLocation="$OriginalVideoLocation"
-      SetSubfolder=""
+     VideoLocation="$OriginalVideoLocation"
+     SetSubfolder=""
 
-			SetFolder=$(./tinker.sh "$TimetableLocation")
-			if [[ "$?" == 0 ]]; then
+     SetFolder=$(./tinker.sh "$TimetableLocation")
+     if [[ "$?" == 0 ]]; then
+	echo "TIMETABLE RUN."
+	SetSubfolder="$SetFolder"
+	VideoLocation="$VideoLocation/$SetSubfolder"
+     fi
+
+      if ps ax | grep -v grep | grep $Process > /dev/null
+      then
+      	#echo "omx is running. Sleeping."
+        sleep 1;
+      else
+      for entry in $VideoLocation/*; do
+        
+         AOUT=local
+         if [[ -f $AOUTLocation ]]; then
+           AOUT=$(cat $AOUTLocation)
+         fi
+
+         echo "$entry"
+         omxplayer -o "$AOUT" "$entry" > /dev/null &
+         PROC1=$!
+         trap 'echo while1; kill -SIGTRAP $PROC1 2>/dev/null; trap SIGTERM; break; terminate' SIGTERM
+         trap 'echo while1; kill -SIGTERM $PROC1 2>/dev/null; trap SIGTERM; break; terminate' SIGTERM
+         trap 'echo while1; kill -SIGINT $PROC1 2>/dev/null; trap SIGINT; break; terminate' SIGINT
+         wait
+         #xset dpms force off
+
+      done &
+      PROC2=$!
+      trap 'echo while2; kill -SIGTERM $PROC2 2>/dev/null; trap SIGINT; break; terminate' SIGTERM
+      trap 'echo while2; kill -SIGINT $PROC2 2>/dev/null; trap SIGINT; break; terminate' SIGINT
+      wait
 
 
-				echo "TIMETABLE RUN."
-				SetSubfolder="$SetFolder"
-				VideoLocation="$VideoLocation/$SetSubfolder"
-
-			fi
-
-
-          if ps ax | grep -v grep | grep $Process > /dev/null
-          then
-                  #echo "omx is running. Sleeping."
-                  sleep 1;
-          else
-                  for entry in $VideoLocation/*
-                  do
-            		    #et dpms force off
-                            # -r for stretched over the entire location
-            		    echo "$entry"
-                    omxplayer.bin -o local "$entry" > /dev/null &
-                    PROC1=$!
-                    trap 'echo while1; kill -SIGTRAP $PROC1 2>/dev/null; trap SIGTERM; break; terminate' SIGTERM
-                    trap 'echo while1; kill -SIGTERM $PROC1 2>/dev/null; trap SIGTERM; break; terminate' SIGTERM
-                    trap 'echo while1; kill -SIGINT $PROC1 2>/dev/null; trap SIGINT; break; terminate' SIGINT
-                    wait
-            		    #xset dpms force off
-                  done &
-                  PROC2=$!
-                  trap 'echo while2; kill -SIGTERM $PROC2 2>/dev/null; trap SIGINT; break; terminate' SIGTERM
-                  trap 'echo while2; kill -SIGINT $PROC2 2>/dev/null; trap SIGINT; break; terminate' SIGINT
-                  wait
-
-
-          fi
+      fi
   done
 }
 looping &
