@@ -2,6 +2,10 @@
 
 counter=0
 
+#amixer -Dhw:CARD=Headphones sget 'Speaker',0 89%
+amixer sset Master,0 100%
+amixer -D'hw:CARD=Headphones' sset 'Headphone',0 96%
+
 function terminate {
 
 
