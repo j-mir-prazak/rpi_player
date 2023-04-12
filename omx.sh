@@ -7,6 +7,12 @@ VideoLocation="./assets"
 TimetableLocation="/boot/timetable.json"
 AOUTLocation="/boot/aout"
 
+AVOLLocation="/boot/avol"
+VOL=96;
+[[ -f "$AVOLLocation" ]] && VOL=$(cat $AVOLLocation)
+amixer sset Master,0 100%
+amixer -D'hw:CARD=Headphones' sset 'Headphone',0 $VOL%
+
 function terminate {
 
   kill -SIGTRAP $PROC1 2>/dev/null
@@ -83,6 +89,11 @@ function looping {
          if [[ -f $AOUTLocation ]]; then
            AOUT=$(cat $AOUTLocation)
          fi
+
+         VOL=96;
+        [[ -f "$AVOLLocation" ]] && VOL=$(cat $AVOLLocation)
+        amixer sset Master,0 100%
+        amixer -D'hw:CARD=Headphones' sset 'Headphone',0 $VOL%
 
          echo "$entry"
          omxplayer -o "$AOUT" "$entry" > /dev/null &
