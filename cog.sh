@@ -3,8 +3,12 @@
 counter=0
 
 #amixer -Dhw:CARD=Headphones sget 'Speaker',0 89%
+
+AVOLLocation="/boot/avol"
+VOL=96;
+[[ -f "$AVOLLocation" ]] && VOL=$(cat $AVOLLocation)
 amixer sset Master,0 100%
-amixer -D'hw:CARD=Headphones' sset 'Headphone',0 96%
+amixer -D'hw:CARD=Headphones' sset 'Headphone',0 $VOL%
 
 function terminate {
 
